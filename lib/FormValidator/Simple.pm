@@ -1,6 +1,6 @@
 package FormValidator::Simple;
 use strict;
-use base qw/Class::Accessor::Fast Class::Data::Inheritable Class::Data::Accessor/;
+use base qw/Class::Accessor::Fast Class::Data::Inheritable Class::Accessor::Grouped/;
 use Class::Inspector;
 use UNIVERSAL::require;
 use Scalar::Util qw/blessed/;
@@ -14,8 +14,8 @@ use FormValidator::Simple::Messages;
 
 our $VERSION = '0.29';
 
-__PACKAGE__->mk_classaccessors(qw/data prof results/);
-__PACKAGE__->mk_classaccessor( messages => FormValidator::Simple::Messages->new );
+__PACKAGE__->mk_group_accessors('inherited' => qw/data prof results messages/);
+__PACKAGE__->messages( FormValidator::Simple::Messages->new );
 
 sub import {
     my $class = shift;
